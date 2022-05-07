@@ -48,9 +48,29 @@ public class HomeController {
         Boolean torf = loginService.login(form.getName());
 
         if(torf == true){
-            return "/books";
+            return "/books/books";
         }else{
             return "redirect:/";
         }
+
     }
+
+    @GetMapping("/admin")
+    public String adminLogin(){
+
+        return "/adminForm";
+    }
+
+    @PostMapping("/adminLoginDo")
+    public String aLogin(MemberForm form){
+        Boolean torf = loginService.adlogin(form.getName());
+
+        if(torf == true){
+            return "/books/books";
+        }else{
+            return "redirect:/";
+        }
+
+    }
+
 }

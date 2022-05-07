@@ -16,4 +16,9 @@ public class LoginService {
         return loginRepository.login(name);
     }
 
+    @Transactional
+    public boolean adlogin(String name){
+        return loginRepository.adlogin(name);
+    }
+
 }
