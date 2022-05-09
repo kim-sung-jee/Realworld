@@ -17,6 +17,7 @@ public class Admin {
     @Column(name = "admin_id")
     private Long id;
 
+
     private String name;
 
 

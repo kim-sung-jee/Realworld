@@ -43,12 +43,15 @@ public class HomeController {
         return "/loginForm";
     }
 
+    // view를 리턴
+    // url을 변경하는거 차이..
+
     @PostMapping("/loginDo")
     public String login(MemberForm form){
         Boolean torf = loginService.login(form.getName());
 
         if(torf == true){
-            return "/books/books";
+            return "/books/books";// 뿌려줘야함
         }else{
             return "redirect:/";
         }
@@ -66,7 +69,7 @@ public class HomeController {
         Boolean torf = loginService.adlogin(form.getName());
 
         if(torf == true){
-            return "/books/books";
+            return "/books/addbooks"; // 입력창 만들어야함
         }else{
             return "redirect:/";
         }

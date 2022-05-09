@@ -19,8 +19,7 @@ public class MemberRepository {
         em.persist(member);
     }
 
-    public void adminsave(Admin admin){
-        em.persist(admin);
-    }
+
+
 
 }

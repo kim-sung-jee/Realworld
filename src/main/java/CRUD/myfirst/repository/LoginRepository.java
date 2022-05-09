@@ -35,13 +35,8 @@ public class LoginRepository {
 
     }
     public Boolean adlogin(String name){
-        Admin admin= new Admin();
-        admin.setName("asdf");
-        em.persist(admin);
-
-
-        Admin admin1 = em.find(Admin.class, 1L);
-        if(admin1.getName() == name ){
+        // 자바의 string 비교...
+        if("asdf".equals(name) ){
             return true;
         }
 
