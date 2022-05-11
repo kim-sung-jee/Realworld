@@ -5,6 +5,8 @@ import CRUD.myfirst.domain.OrderStatus;
 import CRUD.myfirst.exception.AdminAddbookException;
 import CRUD.myfirst.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +17,14 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     private final BookService bookService;
-    
+
+    // 이부분 뭔일인지 블로그에 적어두기
+    @ExceptionHandler(AdminAddbookException.class)
+    ResponseEntity<String> handleNotBlankInAddBook(AdminAddbookException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+
     //@ReqeustBody 와 @RequestParam 차이
     // 일로 post요청이 온다면!
     @PostMapping("/books/addbook")
@@ -27,9 +36,9 @@ public class BookController {
         // 이거 뭘로 넘어오는기 보기
         // 일단 exception 클래스로 확인해보기 !
         // script도 테스트 예정
-        if(bookForm.getBookName()=="" || bookForm.getPublicateDate() ==""){
-            throw new AdminAddbookException("빈칸은 허용하지 않아요");
-        }
+//        if(bookForm.getBookName()=="" || bookForm.getPublicateDate() ==""){
+//            throw new AdminAddbookException("빈칸은 허용하지 않아요");
+//        }
 
         // 엔티티에서 비즈니스 로직이나 생성자 넣는걸 뭐라고하는지 또 왜 사용하는지..
         Book book=new Book();
@@ -50,4 +59,15 @@ public class BookController {
         // baseurl 설정 알아보기
         return "redirect:/";
     }
+
+//    @GetMapping("/booooo")
+//    public ResponseEntity<Message> serverErrorMessage(){
+//        Message message=Message.builder()
+//                .message1("첫번째 메시지 입니다.")
+//                .message2("두번째 메시지 입니다.")
+//                .build();
+//
+//        return new ResponseEntity<>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+
 }
