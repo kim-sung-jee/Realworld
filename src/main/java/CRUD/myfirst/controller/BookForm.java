@@ -11,6 +11,8 @@ public class BookForm {
 
     private String bookName;
 
-    private String isbn;
+    private String publicateDate;
+
+
 
 }

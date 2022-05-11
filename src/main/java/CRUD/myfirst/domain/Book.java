@@ -17,7 +17,9 @@ public class Book {
     private String bookName;
 
     private String publicationDate;
-
+    
+    
+    // 현재 빌려갔는지 안빌려갔는지
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 

@@ -1,15 +1,12 @@
 package CRUD.myfirst.controller;
 
 import CRUD.myfirst.domain.Book;
+import CRUD.myfirst.domain.OrderStatus;
+import CRUD.myfirst.exception.AdminAddbookException;
 import CRUD.myfirst.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,12 +17,37 @@ public class BookController {
     private final BookService bookService;
     
     //@ReqeustBody 와 @RequestParam 차이
+    // 일로 post요청이 온다면!
     @PostMapping("/books/addbook")
     //@ResponseBody 이거 찾아보기
     // @RequestBody 도 찾아보기
-    public String addingBook(BookForm bookForm, Model model){
-        System.out.println("전달되었습니다.");
+    public String addingBook(BookForm bookForm){
+
+        // 예외체크를 bookForm에서 받아야하니깐 여기서 처리해야 하나...?
+        // 이거 뭘로 넘어오는기 보기
+        // 일단 exception 클래스로 확인해보기 !
+        // script도 테스트 예정
+        if(bookForm.getBookName()=="" || bookForm.getPublicateDate() ==""){
+            throw new AdminAddbookException("빈칸은 허용하지 않아요");
+        }
+
+        // 엔티티에서 비즈니스 로직이나 생성자 넣는걸 뭐라고하는지 또 왜 사용하는지..
+        Book book=new Book();
+        book.setBookName(bookForm.getBookName());
+        book.setPublicationDate(bookForm.getPublicateDate());
+        book.setStatus(OrderStatus.FREE);
+
+        bookService.saveBook(book);
+        //다시 리턴
         return "/books/addbooks";
+        
     }
 
+    @GetMapping("/books/returnHome")
+    public String returnHome(){
+        // 여기서 리다이렉트 랑
+        // url전달이랑 뭔차이인지 알아보기
+        // baseurl 설정 알아보기
+        return "redirect:/";
+    }
 }
