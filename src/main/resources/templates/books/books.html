@@ -11,15 +11,20 @@
             <tr>
                 <th>책 이름</th>
                 <th>출시년도</th>
+                <th>여부</th>
+                <th>빌리기버튼</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="book : ${booklist}">
                 <td th:text="${book.bookName}"></td>
                 <td th:text="${book.publicationDate}"></td>
+                <td th:text="${book.status}"></td>
+                <td><a href="/book/orderBook">책 빌리기!</a></td>
             </tr>
             </tbody>
         </table>
     </div>
+
 </body>
 </html>

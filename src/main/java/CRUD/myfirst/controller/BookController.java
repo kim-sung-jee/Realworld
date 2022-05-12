@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -86,4 +87,16 @@ public class BookController {
 //        return new ResponseEntity<>(message,HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 
+
+//    @PostMapping("/books/orderbook")
+//    public void test1(HttpServletRequest httpServletRequest){
+//        System.out.println("BookController.test1"+httpServletRequest.getMethod());
+//    }
+
+
+    //파라미터 경로
+    @GetMapping("/book/orderBook")
+    public String orderBook(){
+        return "/books/orderbook";
+    }
 }
