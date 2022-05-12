@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -29,4 +31,8 @@ public class BookService {
     // 책 찾기 추가하기(하나)
 
     // 책 찾기 추가하기(여러개)
+
+    public List<Book> findBooks(){
+        return bookRepository.findAll();
+    }
 }

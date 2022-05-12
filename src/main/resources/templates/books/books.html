@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <p> ahahahah</p>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>책 이름</th>
+                <th>출시년도</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${booklist}">
+                <td th:text="${book.bookName}"></td>
+                <td th:text="${book.publicationDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

@@ -8,7 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +25,19 @@ public class BookController {
     @ExceptionHandler(AdminAddbookException.class)
     ResponseEntity<String> handleNotBlankInAddBook(AdminAddbookException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/books/books")
+    public String bookList(Model model){
+        List<Book> bookList=bookService.findBooks();
+        model.addAttribute("booklist",bookList);
+
+        return "/books/books";
+
+    }
+    @GetMapping("/books/addbooks")
+    public String addbook(){
+        return "/books/addbooks";
     }
 
 
@@ -48,7 +64,7 @@ public class BookController {
 
         bookService.saveBook(book);
         //다시 리턴
-        return "/books/addbooks";
+        return "redirect:/books/addbooks";
         
     }
 
