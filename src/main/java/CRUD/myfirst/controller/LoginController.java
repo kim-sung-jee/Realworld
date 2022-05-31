@@ -64,4 +64,11 @@ public class LoginController {
         }
         return "redirect:/";
     }
+
+//    @GetMapping("/admin")
+//    public String adlogin(){
+//
+//    }
+
+
 }

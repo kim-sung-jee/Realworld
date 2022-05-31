@@ -1,7 +1,6 @@
 package CRUD.myfirst.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +9,9 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin {
 
     @Id
@@ -19,6 +21,7 @@ public class Admin {
 
 
     private String name;
+
 
 
 }

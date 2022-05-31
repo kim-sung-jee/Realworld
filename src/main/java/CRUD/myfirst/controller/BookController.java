@@ -36,8 +36,10 @@ public class BookController {
         return "/books/books";
 
     }
+
     @GetMapping("/books/addbooks")
     public String addbook(){
+
         return "/books/addbooks";
     }
 
