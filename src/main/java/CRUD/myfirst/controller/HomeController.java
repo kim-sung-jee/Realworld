@@ -1,5 +1,6 @@
 package CRUD.myfirst.controller;
 
+import CRUD.myfirst.config.SessionConst;
 import CRUD.myfirst.domain.Book;
 import CRUD.myfirst.domain.Member;
 import CRUD.myfirst.service.LoginService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.List;
 
@@ -39,8 +41,17 @@ public class HomeController {
         return "redirect:/";
     }
 
-
-
+    @GetMapping("/")
+    public String homeLogin(
+            @SessionAttribute(name = SessionConst.LOGIN_MEMBER,required = false) Member loginMember,Model model
+    ){
+        if(loginMember==null){
+            return "home";
+        }
+        // 세션 잇으면 model에 담아서 넘겨주기.
+        model.addAttribute("member",loginMember);
+        return "/loginHome";
+    }
 
 
 
