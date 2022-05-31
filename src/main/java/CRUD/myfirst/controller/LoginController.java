@@ -2,9 +2,11 @@ package CRUD.myfirst.controller;
 
 import CRUD.myfirst.config.SessionConst;
 import CRUD.myfirst.domain.Member;
+import CRUD.myfirst.domain.Role;
 import CRUD.myfirst.dto.LoginDto;
 import CRUD.myfirst.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -19,19 +21,21 @@ import java.sql.SQLSyntaxErrorException;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class LoginController {
 
     // service
     private final LoginService loginService;
 
     @GetMapping("/login")
+    // @ModelAttribute 생성 후 넘겨주
     public String doLogin(@ModelAttribute("loginDto") LoginDto loginDto){
         return "login/loginForm";
     }
 
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
-                        HttpServletRequest request, @RequestParam(defaultValue = "/") String redirectURL){
+                        @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request){
         if(bindingResult.hasErrors()){
 
             return "login/loginForm";
@@ -46,10 +50,12 @@ public class LoginController {
         HttpSession session = request.getSession();
 
         // 세션에 넣기. session은 아마 response에 담길듯
-        session.setAttribute(SessionConst.LOGIN_MEMBER,member);
-
-
-
+        if(member.getRole()== Role.ADMIN){
+            session.setAttribute(SessionConst.ADMIN_MEMBER,member);
+        }else{
+            session.setAttribute(SessionConst.LOGIN_MEMBER,member);
+        }
+        log.info("fhrmdlqselk"+redirectURL);
 
         return "redirect:"+redirectURL;
     }
@@ -65,10 +71,10 @@ public class LoginController {
         return "redirect:/";
     }
 
-//    @GetMapping("/admin")
-//    public String adlogin(){
-//
-//    }
+    @GetMapping("/admin")
+    public String adlogin(@ModelAttribute LoginDto loginDto){
+        return "login/loginForm";
+    }
 
 
 }

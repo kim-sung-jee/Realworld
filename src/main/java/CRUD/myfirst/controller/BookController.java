@@ -1,10 +1,13 @@
 package CRUD.myfirst.controller;
 
+import CRUD.myfirst.config.SessionConst;
 import CRUD.myfirst.domain.Book;
+import CRUD.myfirst.domain.Member;
 import CRUD.myfirst.domain.OrderStatus;
 import CRUD.myfirst.exception.AdminAddbookException;
 import CRUD.myfirst.service.BookService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 // final이 붙거나 @notnull 이 붙은 필드의 생성자를 자동 생성해주는
 //롬복 어노테이션
+@Slf4j
 public class BookController {
 
     private final BookService bookService;
@@ -38,7 +42,11 @@ public class BookController {
     }
 
     @GetMapping("/books/addbooks")
-    public String addbook(){
+    public String addbook(@SessionAttribute(name = SessionConst.ADMIN_MEMBER,required = false) Member member){
+        log.info(member.getRole().toString()+"gkgkgkgk");
+        if(member == null){
+            return "/";
+        }
 
         return "/books/addbooks";
     }

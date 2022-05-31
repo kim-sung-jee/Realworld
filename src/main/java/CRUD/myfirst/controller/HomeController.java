@@ -3,6 +3,7 @@ package CRUD.myfirst.controller;
 import CRUD.myfirst.config.SessionConst;
 import CRUD.myfirst.domain.Book;
 import CRUD.myfirst.domain.Member;
+import CRUD.myfirst.domain.Role;
 import CRUD.myfirst.service.LoginService;
 import CRUD.myfirst.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -43,13 +44,21 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeLogin(
-            @SessionAttribute(name = SessionConst.LOGIN_MEMBER,required = false) Member loginMember,Model model
+            @SessionAttribute(name = SessionConst.LOGIN_MEMBER,required = false) Member loginMember,
+            @SessionAttribute(name = SessionConst.ADMIN_MEMBER,required = false) Member loginAdmin,
+            Model model
     ){
-        if(loginMember==null){
+        if(loginMember==null&&loginAdmin==null){
             return "home";
         }
         // 세션 잇으면 model에 담아서 넘겨주기.
-        model.addAttribute("member",loginMember);
+        if(loginMember==null){
+            model.addAttribute("member",loginAdmin);
+        }else{
+            model.addAttribute("member",loginMember);
+        }
+
+
         return "/loginHome";
     }
 

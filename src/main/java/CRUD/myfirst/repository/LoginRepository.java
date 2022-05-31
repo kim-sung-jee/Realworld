@@ -1,17 +1,11 @@
 package CRUD.myfirst.repository;
 
-import CRUD.myfirst.domain.Admin;
 import CRUD.myfirst.domain.Member;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.TypeMismatchException;
-import org.hibernate.annotations.common.reflection.XMember;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor

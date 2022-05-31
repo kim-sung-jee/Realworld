@@ -11,4 +11,5 @@ import javax.validation.constraints.NotNull;
 public class LoginDto {
     @NotEmpty
     private String name;
+
 }

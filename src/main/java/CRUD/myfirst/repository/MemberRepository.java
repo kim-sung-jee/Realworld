@@ -1,6 +1,5 @@
 package CRUD.myfirst.repository;
 
-import CRUD.myfirst.domain.Admin;
 import CRUD.myfirst.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
