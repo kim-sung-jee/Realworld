@@ -38,7 +38,7 @@ public class LoginController {
         }
         Member member = loginService.login(loginDto.getName());
         if(member==null){
-            // error mesage
+            // error message
             bindingResult.reject("loginFail","아이디 또는 비밀번호 오류");
             return "login/loginForm";
         }
@@ -54,4 +54,14 @@ public class LoginController {
         return "redirect:"+redirectURL;
     }
 
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session=request.getSession(false);
+        if(session!=null){
+            // 서버쪽 세션 저장소에서
+            // invalidate 하는거임
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
 }
