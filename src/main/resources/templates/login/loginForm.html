@@ -5,12 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-<form role="form" action="/login" th:object="${loginDto}" method="post">
+<form role="form"
+
+      th:action="@{/login?redirectURL=}+${redirectURL}" th:object="${loginDto}" method="post">
+
+    <span th:text="@{/login?redirectURL=}+${redirectURL}"></span>
+<!--<form role="form" th:action="${#strings.isEmpty(loginDto.name)} == true ? @{/login?redirectURL=/books/books}:@{/login}"-->
+<!--      th:object="${loginDto}" method="post">-->
 
     <div th:if="${#fields.hasGlobalErrors()}">
         <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
     </div>
+    <div>
+        <span th:if="${#strings.isEmpty(loginDto.role)}"
+              th:text="haha"></span>
 
+    </div>
 
     <div>
         <label>로그인 id</label>
@@ -18,7 +28,9 @@
                th:errorclass="field-error">
         <div class="field-error" th:errors="*{name}" />
     </div>
-
+    <div class="col">
+        <button type="submit">로그인</button>
+    </div>
 </form>
 </body>
 </html>

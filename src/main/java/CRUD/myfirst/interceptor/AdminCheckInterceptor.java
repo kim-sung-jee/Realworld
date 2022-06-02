@@ -16,10 +16,15 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
         HttpSession session=request.getSession();
+        if(session==null||session.getAttribute(SessionConst.LOGIN_MEMBER)!=null){
+            response.sendRedirect("/");
+            return false;
+        }
+
 
         if(session==null||session.getAttribute(SessionConst.ADMIN_MEMBER)==null){
             log.info("dlqslek!!!!"+requestURI);
-            response.sendRedirect("/login?redirectURL"+requestURI);
+            response.sendRedirect("/login?redirectURL="+requestURI);
             return false;
         }
         return true;

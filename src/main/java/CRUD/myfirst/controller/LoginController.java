@@ -8,6 +8,7 @@ import CRUD.myfirst.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLSyntaxErrorException;
 
@@ -29,17 +31,23 @@ public class LoginController {
 
     @GetMapping("/login")
     // @ModelAttribute 생성 후 넘겨주
-    public String doLogin(@ModelAttribute("loginDto") LoginDto loginDto){
+    public String doLogin(@ModelAttribute("loginDto") LoginDto loginDto, Model requestURLModel,
+                          @RequestParam(defaultValue="/") String redirectURL
+                          ){
+
+        requestURLModel.addAttribute("redirectURL",redirectURL);
         return "login/loginForm";
     }
 
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request){
+
         if(bindingResult.hasErrors()){
 
             return "login/loginForm";
         }
+
         Member member = loginService.login(loginDto.getName());
         if(member==null){
             // error message
@@ -52,8 +60,10 @@ public class LoginController {
         // 세션에 넣기. session은 아마 response에 담길듯
         if(member.getRole()== Role.ADMIN){
             session.setAttribute(SessionConst.ADMIN_MEMBER,member);
+            loginDto.setRole(Role.ADMIN);
         }else{
             session.setAttribute(SessionConst.LOGIN_MEMBER,member);
+            loginDto.setRole(Role.NOMAL);
         }
         log.info("fhrmdlqselk"+redirectURL);
 
@@ -71,10 +81,6 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @GetMapping("/admin")
-    public String adlogin(@ModelAttribute LoginDto loginDto){
-        return "login/loginForm";
-    }
 
 
 }

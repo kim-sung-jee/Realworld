@@ -1,6 +1,7 @@
 package CRUD.myfirst.dto;
 
 
+import CRUD.myfirst.domain.Role;
 import lombok.Data;
 import lombok.Getter;
 
@@ -12,4 +13,5 @@ public class LoginDto {
     @NotEmpty
     private String name;
 
+    private Role role;
 }
