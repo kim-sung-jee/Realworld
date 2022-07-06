@@ -54,8 +54,10 @@ public class HomeController {
         // 세션 잇으면 model에 담아서 넘겨주기.
         if(loginMember==null){
             model.addAttribute("member",loginAdmin);
+            model.addAttribute("role",loginAdmin.getRole());
         }else{
             model.addAttribute("member",loginMember);
+            model.addAttribute("role",null );
         }
 
 

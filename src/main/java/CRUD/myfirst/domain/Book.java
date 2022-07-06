@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -23,5 +25,7 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @OneToMany(mappedBy = "book")
+    private List<FileAttachment> files=new ArrayList<>();
 
 }

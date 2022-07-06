@@ -6,9 +6,10 @@
 </head>
 <body>
 <h4 class="mb-3" th:text="${member.name}">로그인 사용자 이름임</h4>
-<a href="/login">로그인하기</a>
 <a href="/books/books">책들보기!</a>
-<a href="/admin">관리자로그인하기</a>
+<a th:if="${member.role==role.ADMIN}" th:text="책추가하기"
+ th:href="@{/books/addbooks}"
+>안녕하세요 하하</a>
 <div class="col">
     <form th:action="@{/logout}" method="post">
         <button>로그아웃</button>

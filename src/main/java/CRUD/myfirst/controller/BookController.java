@@ -43,7 +43,7 @@ public class BookController {
 
     @GetMapping("/books/addbooks")
     public String addbook(@SessionAttribute(name = SessionConst.ADMIN_MEMBER,required = false) Member member){
-        log.info(member.getRole().toString()+"gkgkgkgk");
+        //log.info(member.getRole().toString()+"gkgkgkgk");
         if(member == null){
             return "/";
         }
@@ -58,14 +58,6 @@ public class BookController {
     //@ResponseBody 이거 찾아보기
     // @RequestBody 도 찾아보기
     public String addingBook(BookForm bookForm){
-
-        // 예외체크를 bookForm에서 받아야하니깐 여기서 처리해야 하나...?
-        // 이거 뭘로 넘어오는기 보기
-        // 일단 exception 클래스로 확인해보기 !
-        // script도 테스트 예정
-//        if(bookForm.getBookName()=="" || bookForm.getPublicateDate() ==""){
-//            throw new AdminAddbookException("빈칸은 허용하지 않아요");
-//        }
 
         // 엔티티에서 비즈니스 로직이나 생성자 넣는걸 뭐라고하는지 또 왜 사용하는지..
         Book book=new Book();
@@ -87,21 +79,6 @@ public class BookController {
         return "redirect:/";
     }
 
-//    @GetMapping("/booooo")
-//    public ResponseEntity<Message> serverErrorMessage(){
-//        Message message=Message.builder()
-//                .message1("첫번째 메시지 입니다.")
-//                .message2("두번째 메시지 입니다.")
-//                .build();
-//
-//        return new ResponseEntity<>(message,HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-
-
-//    @PostMapping("/books/orderbook")
-//    public void test1(HttpServletRequest httpServletRequest){
-//        System.out.println("BookController.test1"+httpServletRequest.getMethod());
-//    }
 
 
     //파라미터 경로

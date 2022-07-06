@@ -38,6 +38,14 @@ public class LoginController {
         requestURLModel.addAttribute("redirectURL",redirectURL);
         return "login/loginForm";
     }
+    // 관리자 로그인전용 컨트롤러?..
+    @GetMapping("/admin")
+    public String doAdminLogin(@ModelAttribute("loginDto") LoginDto loginDto,Model requestURLModel,
+                               @RequestParam(defaultValue = "/")String redirectUrl){
+        requestURLModel.addAttribute("redirectURL",redirectUrl);
+        return "/login/loginForm";
+    }
+
 
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
