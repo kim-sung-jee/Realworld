@@ -19,6 +19,7 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
         if(session==null||session.getAttribute(SessionConst.LOGIN_MEMBER)!=null){
             response.sendRedirect("/");
             return false;
+            //asd
         }
 
 
