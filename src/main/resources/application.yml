@@ -16,6 +16,9 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
 
+file:
+  dir: C:/Users/김성지/Pictures/springtest/
+
 server:
   servlet:
     session:

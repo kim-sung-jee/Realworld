@@ -14,7 +14,7 @@ public class FileUploadService {
     private final FileRepository fileRepository;
 
     @Transactional
-    public Long save(FileDto fileDto){
-        return fileRepository.save(fileDto.toEntity()).getFid();
+    public String save(FileDto fileDto){
+        return fileRepository.save(fileDto.toEntity()).getAllFileName();
     }
 }

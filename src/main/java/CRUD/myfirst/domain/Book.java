@@ -28,4 +28,7 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<FileAttachment> files=new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "fid")
+    private FileAttachment attachFile;
 }

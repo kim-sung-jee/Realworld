@@ -1,15 +1,15 @@
 package CRUD.myfirst.domain;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class FileAttachment {
 
     @Id
@@ -21,7 +21,9 @@ public class FileAttachment {
     
     // 서버에 저장되는 이름
     private String storeFileName;
-    
+
+
+    private String allFileName;
     // 이후 확장자, 사이즈, 파일 패스 저장하기
     
     
@@ -30,8 +32,9 @@ public class FileAttachment {
     private Book book;
 
     @Builder
-    public FileAttachment(Long fid,String uploadFileName,String storeFileName){
+    public FileAttachment(Long fid,String allFileName,String uploadFileName,String storeFileName){
         this.fid=fid;
+        this.allFileName=allFileName;
         this.uploadFileName=uploadFileName;
         this.storeFileName=storeFileName;
     }
